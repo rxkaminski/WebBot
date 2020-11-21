@@ -16,3 +16,4 @@ Get informationn from other API.
 - HtmlAgilityPack
 - Mapster
 - Docker
+- Swagger
