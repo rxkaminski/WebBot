@@ -31,6 +31,7 @@ namespace WebBotCore.Tests.Web
         [InlineData("https://www.www.pl/")]
         [InlineData("https://www.www.pl")]
         [InlineData("https://www.www.pl/site2345/asasa")]
+        [InlineData("https:%2F%2Fwww.www.pl%2Fsite2345%2Fasasa")]
         public void CalculateHost(string uri)
         {
             //Arrange

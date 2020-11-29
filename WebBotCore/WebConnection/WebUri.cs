@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 
 namespace WebBotCore.WebConnection
 {
@@ -12,6 +13,8 @@ namespace WebBotCore.WebConnection
         
         public WebUri(string uri)
         {
+            uri = HttpUtility.UrlDecode(uri);
+
             if (Uri.TryCreate(uri, UriKind.Absolute, out var resultUri))
             {
                 AbsoluteUriCorrected = true;

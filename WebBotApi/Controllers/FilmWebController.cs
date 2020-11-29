@@ -16,7 +16,7 @@ namespace WebBotApi.Controllers
         /// </summary>
         /// <param name="gameName">game name</param>
         /// <returns>list of games</returns>
-        [HttpGet("search/games/{q}")]
+        [HttpGet("search/games/{gameName}")]
         public IActionResult SearchGames(string gameName)
         {
             if (string.IsNullOrWhiteSpace(gameName))
@@ -35,7 +35,7 @@ namespace WebBotApi.Controllers
         /// </summary>
         /// <param name="title">title</param>
         /// <returns>list of films</returns>
-        [HttpGet("search/films/{q}")]
+        [HttpGet("search/films/{title}")]
         public IActionResult SearchFilms(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
