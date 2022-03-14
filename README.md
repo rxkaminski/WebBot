@@ -122,3 +122,5 @@ Get informationn from other API.
 - Mapster
 - Docker
 - Swagger
+- async/await
+- IHttpClientFactory
