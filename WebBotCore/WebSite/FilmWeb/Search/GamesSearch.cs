@@ -1,4 +1,5 @@
-﻿using WebBotCore.WebConnection;
+﻿using System.Net.Http;
+using WebBotCore.WebConnection;
 
 namespace WebBotCore.WebSite.FilmWeb.Search
 {
@@ -6,6 +7,6 @@ namespace WebBotCore.WebSite.FilmWeb.Search
     {
         private static IWebUri WebUri(string q) => new WebUri($"https://www.film" + "web" + $".pl/games/search?q={q}");
 
-        public GamesSearch(string q) : base(WebUri(q)) { }
+        public GamesSearch(string q, IWebResponse webResponse) : base(WebUri(q), webResponse) { }
     }
 }

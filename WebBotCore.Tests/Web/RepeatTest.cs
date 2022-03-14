@@ -1,4 +1,5 @@
-﻿using WebBotCore.Response;
+﻿using System.Threading.Tasks;
+using WebBotCore.Response;
 using WebBotCore.WebConnection;
 using Xunit;
 
@@ -17,7 +18,7 @@ namespace WebBotCore.Tests.Web
             var repeat = new Repeat(request, 5);
 
             //Act
-            var response = repeat.GetResponse();
+            var response = repeat.GetResponseAsync(null).GetAwaiter().GetResult();
 
             //Assert
             Assert.True(response is IStatusOkResponse);
@@ -33,7 +34,7 @@ namespace WebBotCore.Tests.Web
             var repeat = new Repeat(request, 5);
 
             //Act
-            var response = repeat.GetResponse();
+            var response = repeat.GetResponseAsync(null).GetAwaiter().GetResult();
 
             //Assert
             Assert.False(response is IStatusOkResponse);
@@ -45,7 +46,7 @@ namespace WebBotCore.Tests.Web
 
     class RequestToTest : IRequest
     {
-        private readonly Request request = new Request(null);
+        private readonly RequestHttpClient request = new RequestHttpClient(null);
         private readonly short returnOkAfter;
         private short repeated = 0;
 
@@ -54,7 +55,8 @@ namespace WebBotCore.Tests.Web
             this.returnOkAfter = returnOkAfter;
         }
 
-        public IResponse Send()
+#pragma warning disable CS1998
+        public async Task<IResponse> SendAsync(IWebUri webUri)
         {
             repeated++;
 
@@ -63,14 +65,13 @@ namespace WebBotCore.Tests.Web
 
             return InternlServerError();
         }
-
+#pragma warning restore CS1998
 
         public IStatusOkResponse Ok(string value)
             => request.Ok(value);
 
         public INoContentResponse InternlServerError()
             => request.InternlServerError();
-
 
     }
 }

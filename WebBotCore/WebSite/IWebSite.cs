@@ -1,7 +1,9 @@
-﻿namespace WebBotCore.WebSite
+﻿using System.Threading.Tasks;
+
+namespace WebBotCore.WebSite
 {
     public interface IWebSite
     {
-        void Download();
+        Task DownloadAsync();
     }
 }

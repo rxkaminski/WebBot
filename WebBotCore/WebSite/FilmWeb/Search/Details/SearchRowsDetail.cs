@@ -36,7 +36,6 @@ namespace WebBotCore.WebSite.FilmWeb.Search
                 foreach (var subDetail in subDetailWebSites)
                     subDetail.Process(li, webUri);
 
-
                 if (TryCreateModel(subDetailWebSites, out var model))
                     SearchRows.Add(model);
             }

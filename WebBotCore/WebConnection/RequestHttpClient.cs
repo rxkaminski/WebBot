@@ -1,35 +1,31 @@
 ﻿using System;
-using System.IO;
-using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using WebBotCore.Response;
 
 namespace WebBotCore.WebConnection
 {
-    public class Request : IRequest
+    public class RequestHttpClient : IRequest
     {
-        private readonly IWebUri uri;
+        private readonly HttpClient httpClient;
 
-        public Request(IWebUri uri)
+        public RequestHttpClient(HttpClient httpClient)
         {
-            this.uri = uri;
+            this.httpClient = httpClient;
         }
 
-        public IResponse Send()
+        public async Task<IResponse> SendAsync(IWebUri uri)
         {
             try
             {
                 if (!uri.AbsoluteUriCorrected)
                     return InternlServerError();
 
-                string responseFromServer;
+                var responce = await httpClient.GetAsync(uri.AbsoluteUri);
 
-                var request = WebRequest.Create(uri.AbsoluteUri);
-                request.Credentials = CredentialCache.DefaultCredentials;
+                responce.EnsureSuccessStatusCode();
 
-                using (var response = request.GetResponse())
-                using (var dataStream = response.GetResponseStream())
-                using (var reader = new StreamReader(dataStream))
-                    responseFromServer = reader.ReadToEnd();
+                var responseFromServer = await responce.Content.ReadAsStringAsync();
 
                 return Ok(responseFromServer);
             }
@@ -48,7 +44,5 @@ namespace WebBotCore.WebConnection
         {
             return new InternalServerErrorResponse();
         }
-
-
     }
 }

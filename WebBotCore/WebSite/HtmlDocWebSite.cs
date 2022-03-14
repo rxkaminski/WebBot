@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebBotCore.Helpers;
 using WebBotCore.Response;
 using WebBotCore.WebConnection;
@@ -13,15 +14,15 @@ namespace WebBotCore.WebSite
         private readonly IWebResponse webResponse;
         protected IEnumerable<IDetailWebSite<HtmlDocument>> htmlDocDetails;
 
-        public HtmlDocWebSite(IWebUri webUri, IWebResponse webResponse = null)
+        public HtmlDocWebSite(IWebUri webUri, IWebResponse webResponse)
         {
             this.webUri = webUri;
-            this.webResponse = webResponse ?? WebResponseBuilder.Create(webUri);
+            this.webResponse = webResponse;
         }
 
-        public void Download()
+        public async Task DownloadAsync()
         {
-            var response = webResponse.GetResponse();
+            var response = await webResponse.GetResponseAsync(webUri);
 
             if (response is IHtmlDocTranslatedResponse)
             {

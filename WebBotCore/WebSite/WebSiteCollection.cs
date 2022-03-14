@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace WebBotCore.WebSite
 {
@@ -11,10 +12,10 @@ namespace WebBotCore.WebSite
             this.webSites = webUris;
         }
 
-        public void Download()
+        public async Task DownloadAsync()
         {
             foreach (var webSite in webSites)
-                webSite.Download();
+                await webSite.DownloadAsync();
         }
     }
 }

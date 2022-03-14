@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Threading.Tasks;
+using System.Xml;
 using WebBotCore.Response;
 using WebBotCore.Translate;
 using WebBotCore.WebConnection;
@@ -8,18 +9,19 @@ namespace WebBotCore.WebSite.Converters
     public class JsonToXmlConvert : IWebSite
     {
         private readonly IWebResponse webResponse;
+        private readonly IWebUri webUri;
 
         public XmlDocument Xml { get; private set; }
 
-        public JsonToXmlConvert(string uri, IWebResponse webResponse = null)
+        public JsonToXmlConvert(string uri, IWebResponse webResponse)
         {
-            this.webResponse = webResponse ?? WebResponseBuilder.Create(new WebUri(uri),
-                            translateResponse: new JsonToXmlTranslateResponse());
+            this.webUri = new WebUri(uri);
+            this.webResponse = webResponse;
         }
 
-        public void Download()
+        public async Task DownloadAsync()
         {
-            var response = webResponse.GetResponse();
+            var response = await webResponse.GetResponseAsync(webUri);
 
             if (response is IJsonToXmlTranslatedResponse)
                 Xml = (response as IJsonToXmlTranslatedResponse).Xml;
