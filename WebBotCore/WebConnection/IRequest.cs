@@ -1,10 +1,11 @@
-﻿using WebBotCore.Response;
+﻿using System.Threading.Tasks;
+using WebBotCore.Response;
 
 namespace WebBotCore.WebConnection
 {
     public interface IRequest
     {
-        IResponse Send();
+        Task<IResponse> SendAsync(IWebUri webUri);
         IStatusOkResponse Ok(string value);
         INoContentResponse InternlServerError();
     }

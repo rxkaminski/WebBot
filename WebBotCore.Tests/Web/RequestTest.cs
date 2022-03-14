@@ -1,3 +1,4 @@
+using System.Net.Http;
 using WebBotCore.Response;
 using WebBotCore.WebConnection;
 using Xunit;
@@ -11,10 +12,10 @@ namespace WebBotCore.Tests.Web
         {
             //Arrange
             var webUri = new WebUri("https://microsoft.com");
-            var request = new Request(webUri);
+            var request = new RequestHttpClient(new HttpClient());
 
             //Act
-            var response = request.Send();
+            var response = request.SendAsync(webUri).GetAwaiter().GetResult();
 
             //Asset
             Assert.True(response is IStatusOkResponse);
@@ -25,10 +26,10 @@ namespace WebBotCore.Tests.Web
         {
             //Arrange
             var webUri = new WebUri("https://micrasfasfasfasosoftm");
-            var request = new Request(webUri);
+            var request = new RequestHttpClient(new HttpClient());
 
             //Act
-            var response = request.Send();
+            var response = request.SendAsync(webUri).GetAwaiter().GetResult();
 
             //Assert
             Assert.False(response is IStatusOkResponse);

@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
+using System.Net.Http;
 using WebBotCore.WebConnection;
 
 namespace WebBotCore.WebSite.FilmWeb.Search
@@ -8,7 +9,7 @@ namespace WebBotCore.WebSite.FilmWeb.Search
     {
         public List<SearchRowModel> SearchRows { get => Detail<SearchRowsDetail>().SearchRows; }
 
-        public Search(IWebUri webUri) : base(webUri)
+        public Search(IWebUri webUri, IWebResponse webResponse) : base(webUri, webResponse)
         {
             var htmlDocDetailsLocal = new List<IDetailWebSite<HtmlDocument>>
             {

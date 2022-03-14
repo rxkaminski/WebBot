@@ -1,9 +1,10 @@
-﻿using WebBotCore.Response;
+﻿using System.Threading.Tasks;
+using WebBotCore.Response;
 
 namespace WebBotCore.WebConnection
 {
     public interface IWebResponse
     {
-        IResponse GetResponse();
+        Task<IResponse> GetResponseAsync(IWebUri webUri);
     }
 }

@@ -23,7 +23,7 @@ namespace WebBotCore.WebSite.FilmWeb.Film
             };
         }
 
-        public FilmDetails(string q, IWebResponse webResponse = null) : base(WebUri(q), webResponse)
+        public FilmDetails(string q, IWebResponse webResponse) : base(WebUri(q), webResponse)
         {
             var htmlDocDetailsLocal = new List<IDetailWebSite<HtmlDocument>>
             {

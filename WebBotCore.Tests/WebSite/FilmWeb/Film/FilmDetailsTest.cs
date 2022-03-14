@@ -1,5 +1,7 @@
-﻿using WebBotCore.Response;
+﻿using System.Threading.Tasks;
+using WebBotCore.Response;
 using WebBotCore.Tests.Helpers;
+using WebBotCore.Translate;
 using WebBotCore.WebConnection;
 using WebBotCore.WebSite.FilmWeb.Film;
 using Xunit;
@@ -13,11 +15,15 @@ namespace WebBotCore.Tests.WebSite.FilmWeb.Film
         public void CheckResponse()
         {
             //Arrange
-            var fakeWebResponse = WebResponseBuilder.Create(null, request: new FakeRequest());
+            var requestLocal = new FakeRequest();
+            var repeatLocal = new Repeat(requestLocal);
+            var translateResponseLocal = new HtmlDocTranslateResponse();
+
+            var fakeWebResponse = new WebResponse(repeatLocal, translateResponseLocal);
             var filmDetails = new FilmDetails(null, fakeWebResponse);
 
             //Act
-            filmDetails.Download();
+            filmDetails.DownloadAsync().GetAwaiter().GetResult();
             var model = filmDetails.Details;
 
             //Assert
@@ -41,13 +47,14 @@ namespace WebBotCore.Tests.WebSite.FilmWeb.Film
                 return new StatusOkResponse(value);
             }
 
-            public IResponse Send()
+            public async Task<IResponse> SendAsync(IWebUri webUri)
             {
-                var rawHtml = GenerateSite();
+                var rawHtml = await GenerateSite();
                 return Ok(rawHtml);
             }
 
-            private string GenerateSite()
+#pragma warning disable CS1998
+            private async Task<string> GenerateSite()
             {
                 var result = CreatorFilmHtmlDocDetailsWebSite();
                 result.MergeBody(
@@ -59,6 +66,7 @@ namespace WebBotCore.Tests.WebSite.FilmWeb.Film
                     );
                 return result.DocumentNode.OuterHtml;
             }
+#pragma warning restore CS1998
         }
     }
 }

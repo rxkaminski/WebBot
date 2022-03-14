@@ -1,4 +1,5 @@
-﻿using WebBotCore.Response;
+﻿using System.Threading.Tasks;
+using WebBotCore.Response;
 using WebBotCore.Tests.Translate;
 using WebBotCore.Translate;
 using WebBotCore.WebConnection;
@@ -13,11 +14,16 @@ namespace WebBotCore.Tests.WebSite.Converters
         public void JsonToXmlConvert()
         {
             //Arrange
-            var jsonFakeResponse = WebResponseBuilder.Create(null, request: new JsonFakeRequest(), translateResponse: new JsonToXmlTranslateResponse());
+            var requestLocal = new JsonFakeRequest();
+            var repeatLocal = new Repeat(requestLocal);
+            var translateResponseLocal = new JsonToXmlTranslateResponse();
+
+            var jsonFakeResponse = new WebResponse(repeatLocal, translateResponseLocal);
+
             var jsonToXmlConverter = new JsonToXmlConvert(null, jsonFakeResponse);
 
             //Act
-            jsonToXmlConverter.Download();
+            jsonToXmlConverter.DownloadAsync().GetAwaiter().GetResult();
             var xml = jsonToXmlConverter.Xml;
 
             //Assert
@@ -36,10 +42,12 @@ namespace WebBotCore.Tests.WebSite.Converters
                 return new StatusOkResponse(value);
             }
 
-            public IResponse Send()
+#pragma warning disable CS1998
+            public async Task<IResponse> SendAsync(IWebUri webUri)
             {
                 return Ok(JsonToXmlTranslateRespnseHelper.JsonElement);
             }
+#pragma warning restore CS1998
         }
     }
 }

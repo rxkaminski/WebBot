@@ -1,4 +1,5 @@
-﻿using WebBotCore.Response;
+﻿using System.Threading.Tasks;
+using WebBotCore.Response;
 
 namespace WebBotCore.WebConnection
 {
@@ -15,14 +16,13 @@ namespace WebBotCore.WebConnection
             this.RepeatCount = repeatCount;
         }
 
-        public IResponse GetResponse()
+        public async Task<IResponse> GetResponseAsync(IWebUri webUri)
         {
-            IResponse response;
             Repeated = 0;
 
             for (var i = 1; i <= RepeatCount; i++)
             {
-                response = request.Send();
+                IResponse response = await request.SendAsync(webUri);
                 Repeated++;
 
                 if (!(response is IStatusOkResponse))
