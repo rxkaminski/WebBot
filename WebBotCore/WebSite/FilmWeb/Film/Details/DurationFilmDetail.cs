@@ -10,7 +10,7 @@ namespace WebBotCore.WebSite.FilmWeb.Film.Details
 
         public void Process(HtmlDocument htmlDoc, IWebUri webUri)
         {
-            var span = htmlDoc.DocumentNode.SelectSingleNode("//span[@itemprop='timeRequired']");
+            var span = htmlDoc.DocumentNode.SelectSingleNode("//div[@itemprop='timeRequired']");
             Duration = span?.GetAttributes("data-duration")?.FirstOrDefault()?.Value;
         }
     }

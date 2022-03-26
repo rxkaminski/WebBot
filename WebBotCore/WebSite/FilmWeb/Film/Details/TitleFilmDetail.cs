@@ -9,7 +9,7 @@ namespace WebBotCore.WebSite.FilmWeb.Film.Details
 
         public void Process(HtmlDocument htmlDoc, IWebUri webUri)
         {
-            var h1 = htmlDoc.DocumentNode.SelectSingleNode("//h1[contains(@class,'filmCoverSection__title')]");
+            var h1 = htmlDoc.DocumentNode.SelectSingleNode("//h1[contains(@class,'title')]");
             Title = h1?.InnerText;
         }
     }
