@@ -34,7 +34,7 @@ namespace WebBotCore.Tests.WebSite.FilmWeb.Film
                     .CreateElement("html")
                      .CreateElement("body")
                       .CreateElement("div")
-                       .CreateElement("span", null)
+                       .CreateElement("div", null)
                        .CreateAttribute("itemprop", "timeRequired")
                        .CreateAttribute("data-duration", DURATION);
         }
