@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30523.141
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBotCore", "WebBotCore\WebBotCore.csproj", "{A95CF7C4-0791-43F4-A68E-BE0C95BED5CE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBotCore.Tests", "WebBotCore.Tests\WebBotCore.Tests.csproj", "{46DB3F84-E4CB-4B90-BCBA-9791D893AB0A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBotConsole", "WebBotConsole\WebBotConsole.csproj", "{D2878D3A-B164-456E-A452-431823BAEB2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBotApi", "WebBotApi\WebBotApi.csproj", "{1BE92895-2B5B-4045-94E3-506CC17CA2A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBotApi", "WebBotApi\WebBotApi.csproj", "{1BE92895-2B5B-4045-94E3-506CC17CA2A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,14 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A95CF7C4-0791-43F4-A68E-BE0C95BED5CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A95CF7C4-0791-43F4-A68E-BE0C95BED5CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A95CF7C4-0791-43F4-A68E-BE0C95BED5CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A95CF7C4-0791-43F4-A68E-BE0C95BED5CE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46DB3F84-E4CB-4B90-BCBA-9791D893AB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46DB3F84-E4CB-4B90-BCBA-9791D893AB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46DB3F84-E4CB-4B90-BCBA-9791D893AB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46DB3F84-E4CB-4B90-BCBA-9791D893AB0A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2878D3A-B164-456E-A452-431823BAEB2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2878D3A-B164-456E-A452-431823BAEB2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2878D3A-B164-456E-A452-431823BAEB2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
